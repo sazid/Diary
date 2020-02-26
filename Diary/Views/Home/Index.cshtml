@@ -5,24 +5,24 @@
 }
 
 <h2>Memories</h2>
-<h5>Today: @DateTime.Today.ToLongDateString()</h5>
+<h6>@DateTime.Today.ToLongDateString()</h6>
 
-<p>
+<p style="margin-top: 30px;">
     @Html.ActionLink("Create New", "Create", new { area = "" }, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
+<table class="table table-hover">
     <tr>
-        <th>
+        <th width="50%">
             Title
+        </th>
+        <th>
+            Priority
         </th>
         <th>
             Created On
         </th>
         <th>
             Last Modified
-        </th>
-        <th>
-            Priority
         </th>
         <th></th>
     </tr>
@@ -31,6 +31,22 @@
     <tr>
         <td>
             @Html.ActionLink(item.title, "Details", new { id = item.id })
+        </td>
+        <td>
+            @{ 
+                if (item.priority == 1)
+                {
+                    @:<span class="priority-badge priority-high">High</span>
+                }
+                else if (item.priority == 2)
+                {
+                    @:<span class="priority-badge priority-moderate">Moderate</span>
+                }
+                else if (item.priority == 3)
+                {
+                    @:<span class="priority-badge priority-low">Low</span>
+                }
+            }
         </td>
         <td>
             @{
@@ -44,7 +60,7 @@
                 }
                 else
                 {
-                    @item.created_on
+                    @item.created_on.ToShortDateString()<text> </text>@item.created_on.ToShortTimeString()
                 }
             }
         </td>
@@ -60,23 +76,7 @@
                 }
                 else
                 {
-                    @item.last_modified
-                }
-            }
-        </td>
-        <td>
-            @{ 
-                if (item.priority == 1)
-                {
-                    @:<span class="priority-high">High</span>
-                }
-                else if (item.priority == 2)
-                {
-                    @:<span class="priority-moderate">Moderate</span>
-                }
-                else if (item.priority == 3)
-                {
-                    @:<span class="priority-low">Low</span>
+                    @item.last_modified.ToShortDateString()<text> </text>@item.last_modified.ToShortTimeString()
                 }
             }
         </td>
