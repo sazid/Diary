@@ -5,6 +5,7 @@
 }
 
 <h2>Memories</h2>
+<h5>Today: @DateTime.Today.ToShortDateString() @DateTime.Today.DayOfWeek</h5>
 
 <p>
     @Html.ActionLink("Create New", "Create", new { area = "" }, new { @class = "btn btn-primary" })
@@ -29,33 +30,58 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.title)
+            @Html.ActionLink(item.title, "Details", new { id = item.id })
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.created_on)
+            @{
+                if (DateTime.Now.Date == item.created_on.Date)
+                {
+                    @:Today @item.created_on.ToShortTimeString()
+                }
+                else if (DateTime.Now.AddDays(-1).Date == item.created_on.Date)
+                {
+                    @:Yesterday @item.created_on.ToShortTimeString()
+                }
+                else
+                {
+                    @item.created_on
+                }
+            }
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.last_modified)
+            @{
+                if (DateTime.Now.Date == item.last_modified.Date)
+                {
+                    @:Today @item.last_modified.ToShortTimeString()
+                }
+                else if (DateTime.Now.AddDays(-1).Date == item.last_modified.Date)
+                {
+                    @:Yesterday @item.last_modified.ToShortTimeString()
+                }
+                else
+                {
+                    @item.last_modified
+                }
+            }
         </td>
         <td>
             @{ 
                 if (item.priority == 1)
                 {
-                    @:High
+                    @:<span style="color: red;">High</span>
                 }
                 else if (item.priority == 2)
                 {
-                    @:Moderate
+                    @:<span style="color: orange;">Moderate</span>
                 }
                 else if (item.priority == 3)
                 {
-                    @:Low
+                    @:<span style="color: green;">Low</span>
                 }
             }
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.id })
         </td>
     </tr>
