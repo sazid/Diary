@@ -1,0 +1,64 @@
+﻿@model IEnumerable<_17_33330_1_Mid_Lab.Models.Memory>
+
+@{
+    ViewBag.Title = "Memories";
+}
+
+<h2>Memories</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { area = "" }, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Created On
+        </th>
+        <th>
+            Last Modified
+        </th>
+        <th>
+            Priority
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_on)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.last_modified)
+        </td>
+        <td>
+            @{ 
+                if (item.priority == 1)
+                {
+                    @:High
+                }
+                else if (item.priority == 2)
+                {
+                    @:Moderate
+                }
+                else if (item.priority == 3)
+                {
+                    @:Low
+                }
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
