@@ -22,3 +22,27 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.priority-high {
+    color: black;
+    border: 1px solid black;
+    border-radius: 3px;
+    background: #ffaeae;
+    padding: 3px;
+}
+
+.priority-moderate {
+    color: black;
+    border: 1px solid black;
+    border-radius: 3px;
+    background: #ffd27e;
+    padding: 3px;
+}
+
+.priority-low {
+    color: black;
+    border: 1px solid black;
+    border-radius: 3px;
+    background: #9eff9e;
+    padding: 3px;
+}

@@ -5,7 +5,7 @@
 }
 
 <h2>Memories</h2>
-<h5>Today: @DateTime.Today.ToShortDateString() @DateTime.Today.DayOfWeek</h5>
+<h5>Today: @DateTime.Today.ToLongDateString()</h5>
 
 <p>
     @Html.ActionLink("Create New", "Create", new { area = "" }, new { @class = "btn btn-primary" })
@@ -68,15 +68,15 @@
             @{ 
                 if (item.priority == 1)
                 {
-                    @:<span style="color: red;">High</span>
+                    @:<span class="priority-high">High</span>
                 }
                 else if (item.priority == 2)
                 {
-                    @:<span style="color: orange;">Moderate</span>
+                    @:<span class="priority-moderate">Moderate</span>
                 }
                 else if (item.priority == 3)
                 {
-                    @:<span style="color: green;">Low</span>
+                    @:<span class="priority-low">Low</span>
                 }
             }
         </td>
