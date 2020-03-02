@@ -5,14 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="DiaryDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Images">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="path" Type="ntext" Nullable="false" />
-          <Property Name="memory_id" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Memories">
           <Key>
             <PropertyRef Name="id" />
@@ -25,6 +17,13 @@
           <Property Name="priority" Type="int" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Uploads">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="path" Type="varchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="id" />
@@ -34,18 +33,6 @@
           <Property Name="username" Type="nchar" MaxLength="100" Nullable="false" />
           <Property Name="password" Type="nchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Images_Memories">
-          <End Role="Memories" Type="Self.Memories" Multiplicity="1" />
-          <End Role="Images" Type="Self.Images" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Memories">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Images">
-              <PropertyRef Name="memory_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Memories_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Memories" Type="Self.Memories" Multiplicity="*" />
@@ -59,13 +46,9 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DiaryDBModelStoreContainer">
-          <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Memories" EntityType="Self.Memories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uploads" EntityType="Self.Uploads" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Images_Memories" Association="Self.FK_Images_Memories">
-            <End Role="Memories" EntitySet="Memories" />
-            <End Role="Images" EntitySet="Images" />
-          </AssociationSet>
           <AssociationSet Name="FK_Memories_Users" Association="Self.FK_Memories_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Memories" EntitySet="Memories" />
@@ -76,15 +59,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DiaryDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Image">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="memory_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Memory" Relationship="Self.FK_Images_Memories" FromRole="Images" ToRole="Memories" />
-        </EntityType>
         <EntityType Name="Memory">
           <Key>
             <PropertyRef Name="id" />
@@ -96,8 +70,14 @@
           <Property Name="last_modified" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="priority" Type="Int32" Nullable="false" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Images" Relationship="Self.FK_Images_Memories" FromRole="Memories" ToRole="Images" />
           <NavigationProperty Name="User" Relationship="Self.FK_Memories_Users" FromRole="Memories" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Upload">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="path" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -109,18 +89,6 @@
           <Property Name="password" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Memories" Relationship="Self.FK_Memories_Users" FromRole="Users" ToRole="Memories" />
         </EntityType>
-        <Association Name="FK_Images_Memories">
-          <End Role="Memories" Type="Self.Memory" Multiplicity="1" />
-          <End Role="Images" Type="Self.Image" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Memories">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Images">
-              <PropertyRef Name="memory_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Memories_Users">
           <End Role="Users" Type="Self.User" Multiplicity="1" />
           <End Role="Memories" Type="Self.Memory" Multiplicity="*" />
@@ -134,13 +102,9 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DiaryDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Images" EntityType="Self.Image" />
           <EntitySet Name="Memories" EntityType="Self.Memory" />
+          <EntitySet Name="Uploads" EntityType="Self.Upload" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK_Images_Memories" Association="Self.FK_Images_Memories">
-            <End Role="Memories" EntitySet="Memories" />
-            <End Role="Images" EntitySet="Images" />
-          </AssociationSet>
           <AssociationSet Name="FK_Memories_Users" Association="Self.FK_Memories_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Memories" EntitySet="Memories" />
@@ -152,15 +116,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DiaryDBModelStoreContainer" CdmEntityContainer="DiaryDBEntities">
-          <EntitySetMapping Name="Images">
-            <EntityTypeMapping TypeName="DiaryDBModel.Image">
-              <MappingFragment StoreEntitySet="Images">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="path" ColumnName="path" />
-                <ScalarProperty Name="memory_id" ColumnName="memory_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Memories">
             <EntityTypeMapping TypeName="DiaryDBModel.Memory">
               <MappingFragment StoreEntitySet="Memories">
@@ -171,6 +126,14 @@
                 <ScalarProperty Name="last_modified" ColumnName="last_modified" />
                 <ScalarProperty Name="priority" ColumnName="priority" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uploads">
+            <EntityTypeMapping TypeName="DiaryDBModel.Upload">
+              <MappingFragment StoreEntitySet="Uploads">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="path" ColumnName="path" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

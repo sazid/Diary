@@ -67,7 +67,7 @@ namespace _17_33330_1_Mid_Lab.Controllers
         }
 
         // POST: Memories/Create
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Create(FormCollection collection)
         {
             if (!Authorized())
@@ -110,7 +110,7 @@ namespace _17_33330_1_Mid_Lab.Controllers
         }
 
         // POST: Memories/Edit/5
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Edit(int id, FormCollection collection)
         {
             if (!Authorized())
@@ -147,7 +147,7 @@ namespace _17_33330_1_Mid_Lab.Controllers
         }
 
         // POST: Memories/Delete/5
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Delete(int id, FormCollection collection)
         {
             if (!Authorized())

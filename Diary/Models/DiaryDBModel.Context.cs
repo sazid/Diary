@@ -25,8 +25,8 @@ namespace _17_33330_1_Mid_Lab.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Memory> Memories { get; set; }
+        public virtual DbSet<Upload> Uploads { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }

@@ -142,6 +142,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -161,10 +162,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DiaryDBModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Image.cs">
+    <Compile Include="Models\Memory.cs">
       <DependentUpon>DiaryDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Memory.cs">
+    <Compile Include="Models\Upload.cs">
       <DependentUpon>DiaryDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
@@ -199,13 +200,6 @@
     <Content Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </Content>
-    <EntityDeploy Include="Models\DiaryDBModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DiaryDBModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DiaryDBModel.edmx.diagram">
-      <DependentUpon>DiaryDBModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
@@ -225,6 +219,13 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <EntityDeploy Include="Models\DiaryDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DiaryDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DiaryDBModel.edmx.diagram">
+      <DependentUpon>DiaryDBModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -337,9 +338,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Upload\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -24,7 +24,7 @@ namespace _17_33330_1_Mid_Lab.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Login(User user)
         {
             try
@@ -58,7 +58,7 @@ namespace _17_33330_1_Mid_Lab.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Register(User user)
         {
             try

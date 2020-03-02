@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Sazid\source\repos\17_33330_1-Mid_Lab\17_33330_1-Mid_Lab\Models\DiaryDBModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Sazid\source\repos\17_33330_1-Mid_Lab\Diary\Models\DiaryDBModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

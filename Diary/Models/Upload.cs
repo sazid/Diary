@@ -11,13 +11,15 @@ namespace _17_33330_1_Mid_Lab.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Image
+    using System.ComponentModel;
+    using System.Web;
+
+    public partial class Upload
     {
         public int id { get; set; }
+        [DisplayName("Upload File")]
         public string path { get; set; }
-        public int memory_id { get; set; }
-    
-        public virtual Memory Memory { get; set; }
+
+        public HttpPostedFileBase File { get; set; }
     }
 }

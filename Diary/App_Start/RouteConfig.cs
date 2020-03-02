@@ -18,12 +18,6 @@ namespace _17_33330_1_Mid_Lab
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-
-            routes.MapRoute(
-                name: "User",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "User", action = "Index", id = UrlParameter.Optional }
-            );
         }
     }
 }

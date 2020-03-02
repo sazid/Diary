@@ -20,12 +20,13 @@
                     if (Session["username"] != null)
                     {
                         @:<li class="nav-item"><a class="nav-link" href="#">@Session["username"]</a></li>
-                        @:<li class="nav-item">@Html.ActionLink("Logout", "Logout", "User", new { @class = "nav-link" })</li>
+                        @:<li class="nav-item">@Html.ActionLink("Uploads", "Index", new { controller = "Upload" }, new { @class = "nav-link" })</li>
+                        @:<li class="nav-item">@Html.ActionLink("Logout", "Logout", new { controller = "User" }, new { @class = "nav-link" })</li>
                     }
                     else
                     {
-                        @:<li class="nav-item">@Html.ActionLink("Login", "Login", "User", new { @class = "nav-link" })</li>
-                        @:<li class="nav-item">@Html.ActionLink("Register", "Register", "User", new { @class = "nav-link" })</li>
+                        @:<li class="nav-item">@Html.ActionLink("Login", "Login", new { controller = "User" }, new { @class = "nav-link" })</li>
+                        @:<li class="nav-item">@Html.ActionLink("Register", "Register", new { controller = "User" }, new { @class = "nav-link" })</li>
                     }
                 }
             </ul>
